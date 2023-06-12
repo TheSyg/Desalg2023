@@ -1,0 +1,217 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "puntoSeis",
+            "request": "launch",
+            "mainClass": "TP7.puntoSeis",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoCinco",
+            "request": "launch",
+            "mainClass": "TP7.puntoCinco",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoCuatro",
+            "request": "launch",
+            "mainClass": "TP7.puntoCuatro",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoTres",
+            "request": "launch",
+            "mainClass": "TP7.puntoTres",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoDos",
+            "request": "launch",
+            "mainClass": "TP7.puntoDos",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoUno",
+            "request": "launch",
+            "mainClass": "TP7.puntoUno",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "primoRecursivo",
+            "request": "launch",
+            "mainClass": "TP6.primoRecursivo",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoCinco",
+            "request": "launch",
+            "mainClass": "TP6.puntoCinco",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoSiete",
+            "request": "launch",
+            "mainClass": "TP6.puntoSiete",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoDoce",
+            "request": "launch",
+            "mainClass": "TP6.puntoDoce",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoQuince",
+            "request": "launch",
+            "mainClass": "TP6.puntoQuince",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "puntoOcho",
+            "request": "launch",
+            "mainClass": "TP6.puntoOcho",
+            "projectName": "DESALG_fcf0a6e6"
+        },
+        {
+            "type": "java",
+            "name": "test",
+            "request": "launch",
+            "mainClass": "TP5.puntoDos.test",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "testPedido",
+            "request": "launch",
+            "mainClass": "TP4.puntoDoce.testPedido",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "testProducto",
+            "request": "launch",
+            "mainClass": "TP4.puntoDiez.testProducto",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "testReceta",
+            "request": "launch",
+            "mainClass": "TP4.puntoSeis.testReceta",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoDoce",
+            "request": "launch",
+            "mainClass": "TP3.puntoDoce",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoSeis",
+            "request": "launch",
+            "mainClass": "TP3.puntoSeis",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoSiete",
+            "request": "launch",
+            "mainClass": "TP3.puntoSiete",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoTrece",
+            "request": "launch",
+            "mainClass": "TP2.puntoTrece",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoNueve",
+            "request": "launch",
+            "mainClass": "TP2.puntoNueve",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoUno",
+            "request": "launch",
+            "mainClass": "TP2.puntoUno",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoSiete",
+            "request": "launch",
+            "mainClass": "TP1.puntoSiete",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoSeis",
+            "request": "launch",
+            "mainClass": "TP1.puntoSeis",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoCinco",
+            "request": "launch",
+            "mainClass": "TP1.puntoCinco",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "puntoCuatro",
+            "request": "launch",
+            "mainClass": "TP1.puntoCuatro",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoDos",
+            "request": "launch",
+            "mainClass": "TP1.puntoDos",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoTres",
+            "request": "launch",
+            "mainClass": "TP1.puntoTres",
+            "projectName": "DESALG_97024fdf"
+        },
+        {
+            "type": "java",
+            "name": "puntoUno",
+            "request": "launch",
+            "mainClass": "TP1.puntoUno",
+            "projectName": "DESALG_97024fdf"
+        }
+    ]
+}
