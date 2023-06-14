@@ -16,6 +16,6 @@ public class puntoDieciocho {
     }
 
     public static void main(String[] args) {
-        System.out.println(explotar(21, 3) + "|");
+        System.out.println(explotar(24, 6) + "|");
     }
 }
