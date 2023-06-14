@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "puntoCuatro",
+            "request": "launch",
+            "mainClass": "TP6.puntoCuatro",
+            "projectName": "Desalg2023_44fdc3a2"
+        },
+        {
+            "type": "java",
             "name": "puntoSeis",
             "request": "launch",
             "mainClass": "TP7.puntoSeis",
