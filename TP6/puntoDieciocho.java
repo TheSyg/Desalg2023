@@ -5,15 +5,17 @@ public class puntoDieciocho {
         String n1 = "";
         String n2 = "";
 
-        if (n > b) {
-            n1 = explotar(n/b, b);
-            n2 = explotar((n - (n/b)), b);
+        if (n <= b) {
+            n1 = n1 + "|" + n;
+        } else {
+            n1 = explotar(n / b, b);
+            n2 = explotar((n - (n / b)), b);
         }
 
         return n1 + n2;
     }
 
     public static void main(String[] args) {
-        System.out.println(explotar(21, 3));
+        System.out.println(explotar(21, 3) + "|");
     }
 }
