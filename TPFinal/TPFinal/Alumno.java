@@ -1,3 +1,4 @@
+package TPFinal;
 public class Alumno {
 
     // Atributos
@@ -56,10 +57,4 @@ public class Alumno {
         this.promGral = pr;
     }
 
-    // Propias
-    public void pasarGrado() {
-        if (promGral >= 6) {
-            grado++;
-        }
-    }
 }
