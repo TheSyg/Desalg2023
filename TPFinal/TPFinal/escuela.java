@@ -345,6 +345,18 @@ public class escuela {
         return total;
     }
 
+    public static int cuenta_elementos_nonulos(Alumno[] arr) {
+        int total = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != null) {
+                total++;
+            }
+        }
+
+        return total;
+    }
+
     public static void busca_alumno(Alumno[][] esc) {
         int legajo = 0, grado = 0, pos = 0;
         Scanner sc = new Scanner(System.in);
@@ -369,7 +381,9 @@ public class escuela {
             }
         }
 
-        pos = busqBinaria(esc[grado], 0, esc[grado].length - 1, legajo);
+        Alumno[] arrBusq = new Alumno[cuenta_elementos_nonulos(esc[grado])];
+
+        pos = busqBinaria(arrBusq, 0, arrBusq.length - 1, legajo);
 
         if (pos == -1) {
             System.out.println("No se encontró al alumno.");
