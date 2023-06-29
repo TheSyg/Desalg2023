@@ -5,6 +5,12 @@ import java.util.*;
 
 public class escuela {
 
+    public static void imprime_promedios(double[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println("Grado " + (i + 1) + ": " + arr[i]);
+        }
+    }
+
     public static double obtiene_promedio_grado(Alumno[] gr, int contador) {
         double total = 0;
         if (contador < gr.length && gr[contador] != null) {
@@ -193,6 +199,7 @@ public class escuela {
                 break;
             case 2:
                 calcula_promedios_rec(escuela, promedios, 0);
+                imprime_promedios(promedios);
                 break;
             case 3:
 
