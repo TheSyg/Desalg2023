@@ -118,19 +118,30 @@ public class escuela {
         }
     }
 
+    public static int cuenta_alumnos_grado(Alumno[] gr, int contador){
+        int total = 0;
+
+        if (gr[contador] != null && contador < gr.length) {
+            total = 1 + cuenta_alumnos_grado(gr, contador + 1);
+        }
+
+        return total;
+    }
+
     public static double obtiene_promedio_grado(Alumno[] gr, int contador) {
         double total = 0;
+        
         if (contador < gr.length && gr[contador] != null) {
             total += gr[contador].getPromedioGral() + obtiene_promedio_grado(gr, contador + 1);
         }
 
-        return total / (contador - 1);
+        return total;
     }
 
     public static void calcula_promedios_rec(Alumno[][] esc, double[] arr, int fil) {
 
         if (fil < esc.length) {
-            arr[fil] = obtiene_promedio_grado(esc[fil], 0);
+            arr[fil] = obtiene_promedio_grado(esc[fil], 0) / cuenta_alumnos_grado(esc[fil], 0);
             calcula_promedios_rec(esc, arr, fil + 1);
         }
 
@@ -160,7 +171,9 @@ public class escuela {
             int j = 0;
             System.out.println("Alumnos del grado " + (i + 1) + ": ");
             while (arr[i][j] != null && j < arr[0].length) {
-                System.out.println(arr[i][j].toString());
+                System.out.println(arr[i][j].toString() + "\n\r------");
+                j++;
+
             }
         }
     }
@@ -193,17 +206,16 @@ public class escuela {
         int gr = Integer.parseInt(atributos[3]);
         double pr = Double.parseDouble(atributos[4]);
 
-        return new Alumno(ap, nom, leg, gr, pr);
+        Alumno aux = new Alumno(ap, nom, leg, gr, pr);
+
+        return aux;
     }
 
     public static void lee_lista(String unaRaiz, Alumno[][] esc) {
-        String linea = null;
 
-        try {
-            FileReader lectorArchivo = new FileReader(unaRaiz);
-            BufferedReader bufferLectura = new BufferedReader(lectorArchivo);
-            while ((linea = bufferLectura.readLine()) != null) {
-                linea = bufferLectura.readLine();
+        try (BufferedReader br = new BufferedReader(new FileReader(unaRaiz))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
                 String[] atributos_temp = linea.split(";");
                 Alumno alumno_temporal;
 
@@ -211,7 +223,7 @@ public class escuela {
                 if (atributos_temp.length == 5) {
                     // El orden tiene que ser el mismo del archivo.
                     // Esto es: apellido, nombre, legajo, grado y promedio.
-                    int checkGrado = Integer.parseInt(atributos_temp[3]);
+                    int checkGrado = Integer.valueOf(atributos_temp[3]);
 
                     // Check que el grado esté en el rango.
                     // Check que el legajo tenga 4 caracteres (o sea, tenga 4 digitos)
@@ -226,8 +238,9 @@ public class escuela {
                 } else {
                     System.out.println("Número de atributos inválidos.");
                 }
+
             }
-            bufferLectura.close();
+            br.close();
         } catch (FileNotFoundException ex) {
             System.err.println(ex.getMessage());
         } catch (IOException ex) {
@@ -265,11 +278,11 @@ public class escuela {
         while (!stop) {
             opcion = sc.next().charAt(0);
             if (Character.toLowerCase(opcion) == 'y') {
-                raiz = "D:/Desalg2023/TPFinal/ListaAlumnos.txt";
+                raiz = "D:\\Desalg2023\\TPFinal\\TPFinal\\ListaAlumnos.txt";
                 stop = true;
             } else if (Character.toLowerCase(opcion) == 'n') {
                 System.out.println("Ingrese una raiz nueva>");
-                raiz = sc.nextLine();
+                raiz = sc.next();
                 stop = true;
             } else {
                 System.out.println("Error de ingreso.");
@@ -281,14 +294,14 @@ public class escuela {
     }
 
     public static void pasar(Alumno[][] esc, List<Alumno> egr) {
-        for (int i = esc.length; i >= 1; i--) {
+        for (int i = esc.length - 1; i >= 1; i--) {
             int j = 0; // Reset.
             while (esc[i][j] != null && j < esc[0].length) {
 
                 // Check nota.
                 if (esc[i][j].getPromedioGral() >= 6.0) {
                     // Check sólo si está en el último grado.
-                    if (i == esc.length) {
+                    if (i == esc.length - 1) {
                         // Se agrega a la lista de egresados.
                         egr.add(esc[i][j]);
                         esc[i][j] = null;

@@ -36,6 +36,14 @@ public class Alumno {
         return this.promGral;
     }
 
+    public String toString() {
+        return "Nombre: " + this.nombre +
+                "\n\rApellido: " + this.apellido +
+                "\n\rLegajo: " + this.legajo +
+                "\n\rGrado: " + this.grado +
+                "\n\rPromedio: " + this.promGral;
+    }
+
     public String getComparadorNombre() {
         String comp = this.apellido + this.nombre;
         return comp;
