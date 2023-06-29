@@ -5,6 +5,30 @@ import java.util.*;
 
 public class escuela {
 
+    public static void cambiazo(Alumno[] arr, int pos1, int pos2) {
+        Alumno temp = arr[pos1];
+        arr[pos1] = arr[pos2];
+        arr[pos2] = temp;
+    }
+
+    public static void organiza_alfab_gr(Alumno[] arr) {
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i].getComparadorNombre().compareTo(arr[j].getComparadorNombre()) < 0) {
+                    cambiazo(arr, i, j);
+                }
+            }
+        }
+
+    }
+
+    public static void organiza_alfab(Alumno[][] esc) {
+        for (int i = 0; i < esc.length; i++) {
+            organiza_alfab_gr(esc[i]);
+        }
+    }
+
     public static void imprime_promedios(double[] arr) {
         for (int i = 0; i < arr.length; i++) {
             System.out.println("Grado " + (i + 1) + ": " + arr[i]);
@@ -45,6 +69,16 @@ public class escuela {
 
             arr[j] = null;
             j++;
+        }
+    }
+
+    public static void imprime_alumnos(Alumno[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            int j = 0;
+            System.out.println("Alumnos del grado " + (i + 1) + ": ");
+            while (arr[i][j] != null && j < arr[0].length) {
+                System.out.println(arr[i][j].toString());
+            }
         }
     }
 
@@ -202,10 +236,10 @@ public class escuela {
                 imprime_promedios(promedios);
                 break;
             case 3:
-
+                organiza_alfab(escuela);
+                imprime_alumnos(escuela);
                 break;
             case 4:
-
                 break;
             case 5:
                 break;

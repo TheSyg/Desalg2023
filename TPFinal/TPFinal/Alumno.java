@@ -1,6 +1,6 @@
 package TPFinal;
-public class Alumno {
 
+public class Alumno {
     // Atributos
     private String apellido, nombre;
     private int legajo, grado;
@@ -34,6 +34,11 @@ public class Alumno {
 
     public double getPromedioGral() {
         return this.promGral;
+    }
+
+    public String getComparadorNombre() {
+        String comp = this.apellido + this.nombre;
+        return comp;
     }
 
     // Modif
