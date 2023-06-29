@@ -383,16 +383,16 @@ public class escuela {
             }
         }
 
-        Alumno[] arrBusq = new Alumno[cuenta_elementos_nonulos(esc[grado])];
+        Alumno[] arrBusq = new Alumno[cuenta_elementos_nonulos(esc[grado - 1])];
 
-        carga_arreglo_busq(arrBusq, esc[grado]);
+        carga_arreglo_busq(arrBusq, esc[grado - 1]);
 
         pos = busqBinaria(arrBusq, 0, arrBusq.length - 1, legajo);
 
         if (pos == -1) {
             System.out.println("No se encontró al alumno.");
         } else {
-            System.out.println("Alumno encontrado en la posición: " + pos);
+            System.out.println("Alumno encontrado en la posición: " + (pos + 1));
         }
 
     }
@@ -401,6 +401,7 @@ public class escuela {
         int i = 0;
         while (arr2[i] != null && i < arr1.length) {
             arr1[i] = arr2[i];
+            i++;
         }
     }
 
@@ -439,7 +440,6 @@ public class escuela {
         carga_lista(escuela);
 
         while (!stop) {
-
             switch (menu()) {
                 case 1:
                     pasar(escuela, egresadosLista);
