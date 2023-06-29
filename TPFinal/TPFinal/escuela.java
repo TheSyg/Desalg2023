@@ -77,14 +77,12 @@ public class escuela {
         }
     }
 
-    public static Alumno[] arreglo_egresados(List<Alumno> egr) {
-        Alumno[] proms = new Alumno[egr.size()];
+    public static void arreglo_egresados(Alumno[] egr, List<Alumno> listaEgr) {
 
-        for (int i = 0; i < proms.length; i++) {
-            proms[i] = egr.get(i);
+        for (int i = 0; i < egr.length; i++) {
+            egr[i] = listaEgr.get(i);
         }
 
-        return proms;
     }
 
     public static void cambiazo(Alumno[] arr, int pos1, int pos2) {
@@ -94,14 +92,18 @@ public class escuela {
     }
 
     public static void organiza_alfab_gr(Alumno[] arr) {
+        int i = 0;
+        int j = 0;
 
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = i + 1; j < arr.length; j++) {
-                // Compara lexicografía, si es mayor entonces intercambio elementos.
+        while (i < arr.length && arr[i] != null) {
+            j = i + 1;
+            while (j < arr.length && arr[j] != null) {
                 if (arr[i].getComparadorNombre().compareTo(arr[j].getComparadorNombre()) > 0) {
                     cambiazo(arr, i, j);
                 }
+                j++;
             }
+            i++;
         }
 
     }
@@ -118,7 +120,7 @@ public class escuela {
         }
     }
 
-    public static int cuenta_alumnos_grado(Alumno[] gr, int contador){
+    public static int cuenta_alumnos_grado(Alumno[] gr, int contador) {
         int total = 0;
 
         if (gr[contador] != null && contador < gr.length) {
@@ -130,7 +132,7 @@ public class escuela {
 
     public static double obtiene_promedio_grado(Alumno[] gr, int contador) {
         double total = 0;
-        
+
         if (contador < gr.length && gr[contador] != null) {
             total += gr[contador].getPromedioGral() + obtiene_promedio_grado(gr, contador + 1);
         }
@@ -319,6 +321,7 @@ public class escuela {
     }
 
     public static void imprime_egresados(Alumno[] egr) {
+        System.out.println("-----\n\rEgresados\n\r-----");
         for (int i = 0; i < egr.length; i++) {
             System.out.println(egr[i].toString());
         }
@@ -347,7 +350,8 @@ public class escuela {
                     imprime_alumnos(escuela);
                     break;
                 case 4:
-                    Alumno[] prom_egresados = arreglo_egresados(egresadosLista);
+                    Alumno[] prom_egresados = new Alumno[egresadosLista.size()];
+                    arreglo_egresados(prom_egresados, egresadosLista);
                     ord_promedio_mergesort(prom_egresados, 0, prom_egresados.length - 1);
                     imprime_egresados(prom_egresados);
                     break;

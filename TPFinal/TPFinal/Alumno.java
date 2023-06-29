@@ -1,5 +1,6 @@
 package TPFinal;
 
+
 public class Alumno {
     // Atributos
     private String apellido, nombre;
@@ -46,6 +47,7 @@ public class Alumno {
 
     public String getComparadorNombre() {
         String comp = this.apellido + this.nombre;
+        comp = normalizar(comp);
         return comp;
     }
 
@@ -68,6 +70,26 @@ public class Alumno {
 
     public void setPromedioGral(double pr) {
         this.promGral = pr;
+    }
+
+    // propias
+
+    public static String normalizar(String unString){
+
+        unString = unString.replaceAll("á", "a");
+        unString = unString.replaceAll("é", "e");
+        unString = unString.replaceAll("í", "i");
+        unString = unString.replaceAll("ó", "o");
+        unString = unString.replaceAll("ú", "u");
+        unString = unString.replaceAll("Á", "A");
+        unString = unString.replaceAll("É", "E");
+        unString = unString.replaceAll("Í", "I");
+        unString = unString.replaceAll("Ó", "O");
+        unString = unString.replaceAll("Ú", "U");
+        unString = unString.replaceAll("ñ", "n");
+        unString = unString.replaceAll("Ñ", "N");
+
+        return unString;
     }
 
 }
