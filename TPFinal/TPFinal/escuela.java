@@ -5,6 +5,88 @@ import java.util.*;
 
 public class escuela {
 
+    public static void unir(Alumno[] egr, int izq, int centro, int der) {
+
+        // Indice que se usan para organizar los subarreglos.
+        int i = 0, j = 0;
+
+        // Longitudes de los arreglos a unirse.
+        int long1 = centro - izq + 1;
+        int long2 = der - centro;
+
+        // Arreglos a unirse
+        Alumno[] arr_izq = new Alumno[long1];
+        Alumno[] arr_der = new Alumno[long2];
+
+        // Carga a los arreglos.
+        for (int k = 0; k < arr_izq.length; k++) {
+            // izq es el inicio del superarreglo egr y el inicio del subarreglo izquierdo.
+            arr_izq[k] = egr[izq + k];
+        }
+
+        for (int k = 0; k < arr_der.length; k++) {
+            // centro es el centro del superarreglo egr y el inicio del subarreglo derecho.
+            arr_der[k] = egr[centro + k + 1];
+        }
+
+        int k = izq; // Indice inicial del nuevo arreglo.
+
+        // Inicio organización.
+        while (i < long1 && j < long2) {
+            // Compara ambas notas, elige la más alta como elemento del subarreglo.
+            if (arr_izq[i].getPromedioGral() <= arr_der[j].getPromedioGral()) {
+                egr[k] = arr_der[j];
+                j++;
+            } else {
+                egr[k] = arr_izq[i];
+                i++;
+            }
+            k++;
+        }
+
+        // Elementos restantes
+        while (i < long1) {
+            egr[k] = arr_izq[i];
+            i++;
+            k++;
+        }
+        while (j < long2) {
+            egr[k] = arr_der[j];
+            j++;
+            k++;
+        }
+
+    }
+
+    public static void ord_promedio_mergesort(Alumno[] egr, int izq, int der) {
+
+        // Caso Base
+        if (izq < der) {
+
+            // Busca centro.
+            int centro = (izq + der) / 2;
+
+            // PR
+            ord_promedio_mergesort(egr, izq, centro);
+            ord_promedio_mergesort(egr, centro + 1, der);
+
+            // Reune los subarreglos (merge)
+
+            unir(egr, izq, centro, der);
+
+        }
+    }
+
+    public static Alumno[] arreglo_egresados(List<Alumno> egr) {
+        Alumno[] proms = new Alumno[egr.size()];
+
+        for (int i = 0; i < proms.length; i++) {
+            proms[i] = egr.get(i);
+        }
+
+        return proms;
+    }
+
     public static void cambiazo(Alumno[] arr, int pos1, int pos2) {
         Alumno temp = arr[pos1];
         arr[pos1] = arr[pos2];
@@ -15,7 +97,8 @@ public class escuela {
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i].getComparadorNombre().compareTo(arr[j].getComparadorNombre()) < 0) {
+                // Compara lexicografía, si es mayor entonces intercambio elementos.
+                if (arr[i].getComparadorNombre().compareTo(arr[j].getComparadorNombre()) > 0) {
                     cambiazo(arr, i, j);
                 }
             }
@@ -117,7 +200,7 @@ public class escuela {
         String linea = null;
 
         try (BufferedReader br = new BufferedReader(new FileReader(unaRaiz))) {
-            while (br.readLine() != null) {
+            while (br.readLine() != null && linea != null) {
                 linea = br.readLine();
                 String[] atributos_temp = linea.split(";");
                 Alumno alumno_temporal;
@@ -160,7 +243,7 @@ public class escuela {
         System.out.println("2. Calcular promedio del grado.");
         System.out.println("3. Listar alumnos de un grado por apellido y nombre de forma ascendente.");
         System.out.println("4. Mostrar promedio alumnos egresados por promedio de forma descendente.");
-        System.out.println("5. Mostrar vacantes.\n\r6. Ubicar alumno.\n\r----------");
+        System.out.println("5. Mostrar vacantes.\n\r6. Ubicar alumno.\n\r7. Imprimir Alumnos.\n\r----------");
         System.out.println("Ingrese cualquier otro numero para salir.");
 
         opcion = sc.nextShort();
@@ -219,34 +302,50 @@ public class escuela {
         }
     }
 
+    public static void imprime_egresados(Alumno[] egr) {
+        for (int i = 0; i < egr.length; i++) {
+            System.out.println(egr[i].toString());
+        }
+    }
+
     public static void main(String[] args) {
 
         Alumno[][] escuela = new Alumno[7][30];
         double[] promedios = new double[7];
         List<Alumno> egresadosLista = new ArrayList<>();
-
+        boolean stop = false;
         carga_lista(escuela);
 
-        switch (menu()) {
-            case 1:
-                pasar(escuela, egresadosLista);
-                break;
-            case 2:
-                calcula_promedios_rec(escuela, promedios, 0);
-                imprime_promedios(promedios);
-                break;
-            case 3:
-                organiza_alfab(escuela);
-                imprime_alumnos(escuela);
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            default:
-                break;
+        while (!stop) {
+
+            switch (menu()) {
+                case 1:
+                    pasar(escuela, egresadosLista);
+                    break;
+                case 2:
+                    calcula_promedios_rec(escuela, promedios, 0);
+                    imprime_promedios(promedios);
+                    break;
+                case 3:
+                    organiza_alfab(escuela);
+                    imprime_alumnos(escuela);
+                    break;
+                case 4:
+                    Alumno[] prom_egresados = arreglo_egresados(egresadosLista);
+                    ord_promedio_mergesort(prom_egresados, 0, prom_egresados.length - 1);
+                    imprime_egresados(prom_egresados);
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    imprime_alumnos(escuela);
+                    break;
+                default:
+                    stop = true;
+                    break;
+            }
         }
 
     }

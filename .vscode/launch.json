@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "escuela",
+            "request": "launch",
+            "mainClass": "TPFinal.escuela",
+            "projectName": "Desalg2023_44fdc3a2"
+        },
+        {
+            "type": "java",
             "name": "puntoDieciocho",
             "request": "launch",
             "mainClass": "TP6.puntoDieciocho",
