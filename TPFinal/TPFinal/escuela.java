@@ -327,11 +327,89 @@ public class escuela {
         }
     }
 
+    public static int cuenta_vacantes(Alumno[][] esc, int fil, int col) {
+        int total = 0;
+
+        if (fil < esc.length) {
+            if (col < esc[0].length) {
+                if (esc[fil][col] == null) {
+                    total = 1 + cuenta_vacantes(esc, fil, col + 1);
+                } else {
+                    total = cuenta_vacantes(esc, fil, col + 1);
+                }
+            } else {
+                total = cuenta_vacantes(esc, fil + 1, 0);
+            }
+        }
+
+        return total;
+    }
+
+    public static void busca_alumno(Alumno[][] esc) {
+        int legajo = 0, grado = 0, pos = 0;
+        Scanner sc = new Scanner(System.in);
+        boolean stop = false;
+        System.out.println("Ingrese el grado del alumno> ");
+        while (!stop) {
+            grado = sc.nextInt();
+            if (grado >= 1 && grado <= 7) {
+                stop = true;
+            } else {
+                System.out.println("Grado inválido.");
+            }
+        }
+        System.out.println("Ingrese el legajo del estudiante> ");
+        stop = false;
+        while (!stop) {
+            legajo = sc.nextInt();
+            if (legajo >= 1000 && legajo <= 9999) {
+                stop = true;
+            } else {
+                System.out.println("Legajo inválido.");
+            }
+        }
+
+        pos = busqBinaria(esc[grado], 0, esc[grado].length - 1, legajo);
+
+        if (pos == -1) {
+            System.out.println("No se encontró al alumno.");
+        } else {
+            System.out.println("Alumno encontrado en la posición: " + pos);
+        }
+
+    }
+
+    public static int busqBinaria(Alumno[] arr, int ini, int fin, int obj) {
+        int busq = 0;
+        int med = (ini + fin) / 2; // Centro
+        if (ini <= fin && fin >= 1) {
+            // Chequea que se mantenga dentro del arreglo.
+            if (arr[med].getLegajo() == obj) {
+                // Encontró
+                busq = med;
+            } else {
+                // No encontró y aún queda por iterar.
+                if (arr[med].getLegajo() > obj) {
+                    // Si es más pequeño, entonces está en el subarreglo izquierdo.
+                    busq = busqBinaria(arr, ini, med - 1, obj);
+                } else {
+                    // Si es mayor, entonces está en el subarreglo derecho.
+                    busq = busqBinaria(arr, med + 1, fin, obj);
+                }
+            }
+        } else {
+            busq = -1;
+        }
+
+        return busq;
+    }
+
     public static void main(String[] args) {
 
         Alumno[][] escuela = new Alumno[7][30];
         double[] promedios = new double[7];
         List<Alumno> egresadosLista = new ArrayList<>();
+        int vacantes = 0;
         boolean stop = false;
         carga_lista(escuela);
 
@@ -356,8 +434,11 @@ public class escuela {
                     imprime_egresados(prom_egresados);
                     break;
                 case 5:
+                    vacantes = cuenta_vacantes(escuela, 0, 0);
+                    System.out.println("Hay " + vacantes + " vacantes disponibles.");
                     break;
                 case 6:
+                    busca_alumno(escuela);
                     break;
                 case 7:
                     imprime_alumnos(escuela);
