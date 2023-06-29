@@ -5,6 +5,8 @@ import java.util.*;
 
 public class escuela {
 
+    
+
     public static void elimina_null(Alumno[] arr) {
         int j = 0;
 
@@ -163,14 +165,15 @@ public class escuela {
 
     public static void main(String[] args) {
 
-        Alumno[][] escuela = new Alumno[30][7];
-        List<Alumno> egresados = new ArrayList<>();
+        Alumno[][] escuela = new Alumno[7][30];
+        double[] promedios = new double[7];
+        List<Alumno> egresadosLista = new ArrayList<>();
 
         carga_lista(escuela);
 
         switch (menu()) {
             case 1:
-                pasar(escuela, egresados);
+                pasar(escuela, egresadosLista);
                 break;
             case 2:
 
