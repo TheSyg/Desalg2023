@@ -171,7 +171,9 @@ public class escuela {
     public static void imprime_alumnos(Alumno[][] arr) {
         for (int i = 0; i < arr.length; i++) {
             int j = 0;
+            System.out.println("-----");
             System.out.println("Alumnos del grado " + (i + 1) + ": ");
+            System.out.println("-----");
             while (arr[i][j] != null && j < arr[0].length) {
                 System.out.println(arr[i][j].toString() + "\n\r------");
                 j++;
