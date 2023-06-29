@@ -199,9 +199,11 @@ public class escuela {
     public static void lee_lista(String unaRaiz, Alumno[][] esc) {
         String linea = null;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(unaRaiz))) {
-            while (br.readLine() != null && linea != null) {
-                linea = br.readLine();
+        try {
+            FileReader lectorArchivo = new FileReader(unaRaiz);
+            BufferedReader bufferLectura = new BufferedReader(lectorArchivo);
+            while ((linea = bufferLectura.readLine()) != null) {
+                linea = bufferLectura.readLine();
                 String[] atributos_temp = linea.split(";");
                 Alumno alumno_temporal;
 
@@ -225,6 +227,7 @@ public class escuela {
                     System.out.println("Número de atributos inválidos.");
                 }
             }
+            bufferLectura.close();
         } catch (FileNotFoundException ex) {
             System.err.println(ex.getMessage());
         } catch (IOException ex) {
