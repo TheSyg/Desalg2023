@@ -5,7 +5,23 @@ import java.util.*;
 
 public class escuela {
 
-    
+    public static double obtiene_promedio_grado(Alumno[] gr, int contador) {
+        double total = 0;
+        if (contador < gr.length && gr[contador] != null) {
+            total += gr[contador].getPromedioGral() + obtiene_promedio_grado(gr, contador + 1);
+        }
+
+        return total / (contador - 1);
+    }
+
+    public static void calcula_promedios_rec(Alumno[][] esc, double[] arr, int fil) {
+
+        if (fil < esc.length) {
+            arr[fil] = obtiene_promedio_grado(esc[fil], 0);
+            calcula_promedios_rec(esc, arr, fil + 1);
+        }
+
+    }
 
     public static void elimina_null(Alumno[] arr) {
         int j = 0;
@@ -176,7 +192,7 @@ public class escuela {
                 pasar(escuela, egresadosLista);
                 break;
             case 2:
-
+                calcula_promedios_rec(escuela, promedios, 0);
                 break;
             case 3:
 
