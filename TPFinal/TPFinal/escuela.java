@@ -5,17 +5,40 @@ import java.util.*;
 
 public class escuela {
 
+    public static void elimina_null(Alumno[] arr) {
+        int j = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != null) {
+                // Encontró no nulo.
+                arr[j] = arr[i]; // Guarda en la posición más cercana al inicio posible.
+                j++;
+            }
+        }
+
+        while (j < arr.length) {
+            // Cualquier elemento después de j se hace nulo.
+
+            arr[j] = null;
+            j++;
+        }
+    }
+
     public static void agrega_alumno(Alumno[] esc, Alumno al) {
         // Método que agrega al alumno en el arreglo de grado correspondiente
         int i = 0;
         boolean detenerse = false;
 
-        while (!detenerse) {
+        while (!detenerse && i < esc.length) {
             if (esc[i] == null) {
                 esc[i] = al;
                 detenerse = true;
+                System.out.println("Alumno cargado.");
             }
             i++;
+            if (i > esc.length) {
+                System.out.println("Error, no hay vacantes en el grado.");
+            }
         }
 
     }
@@ -113,14 +136,41 @@ public class escuela {
 
     }
 
+    public static void pasar(Alumno[][] esc, List<Alumno> egr) {
+        for (int i = esc.length; i >= 1; i--) {
+            int j = 0; // Reset.
+            while (esc[i][j] != null && j < esc[0].length) {
+
+                // Check nota.
+                if (esc[i][j].getPromedioGral() >= 6.0) {
+                    // Check sólo si está en el último grado.
+                    if (i == esc.length) {
+                        // Se agrega a la lista de egresados.
+                        egr.add(esc[i][j]);
+                        esc[i][j] = null;
+                    } else {
+                        // No está en el último grado.
+                        esc[i][j].setGrado(i + 1);
+                        agrega_alumno(esc[i + 1], esc[i][j]);
+                        esc[i][j] = null;
+                    }
+                }
+                j++;
+            }
+            elimina_null(esc[i]);
+        }
+    }
+
     public static void main(String[] args) {
 
         Alumno[][] escuela = new Alumno[30][7];
+        List<Alumno> egresados = new ArrayList<>();
 
         carga_lista(escuela);
 
         switch (menu()) {
             case 1:
+                pasar(escuela, egresados);
                 break;
             case 2:
 
