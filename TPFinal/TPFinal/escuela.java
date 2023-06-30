@@ -258,12 +258,13 @@ public class escuela {
         short opcion = 0;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Menu de escuela\n\r----------");
+        System.out.println("-----\n\rMenu de escuela\n\r-----");
         System.out.println("1. Pasar de Grado.");
         System.out.println("2. Calcular promedio del grado.");
         System.out.println("3. Listar alumnos de un grado por apellido y nombre de forma ascendente.");
         System.out.println("4. Mostrar promedio alumnos egresados por promedio de forma descendente.");
-        System.out.println("5. Mostrar vacantes.\n\r6. Ubicar alumno.\n\r7. Imprimir Alumnos.\n\r----------");
+        System.out.println("5. Mostrar vacantes.\n\r6. Ubicar alumno.\n\r7. Imprimir Alumnos.");
+        System.out.println("8. Pasar alumnos según lista.\n\r-----");
         System.out.println("Ingrese cualquier otro numero para salir.");
 
         opcion = sc.nextShort();
@@ -430,11 +431,123 @@ public class escuela {
         return busq;
     }
 
+    public static void carga_repitentes(List<String> rep) {
+        try (BufferedReader br = new BufferedReader(
+                new FileReader("D:\\Desalg2023\\TPFinal\\TPFinal\\ListaDesaprobados.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                rep.add(linea);
+            }
+            br.close();
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.err.println("Error leyendo o escribiendo en algun archivo.");
+        }
+    }
+
+    public static void carga_arr_repitente(int[] arr, List<String> lista) {
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = Integer.valueOf(lista.get(i));
+        }
+    }
+
+    public static void elimina_ceros(int[] arr) {
+        int j = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                // Encontró no nulo.
+                arr[j] = arr[i]; // Guarda en la posición más cercana al inicio posible.
+                j++;
+            }
+        }
+
+        while (j < arr.length) {
+            // Cualquier elemento después de j se hace nulo.
+            arr[j] = 0;
+            j++;
+        }
+    }
+
+    public static void moverCerosAlFinal(int[] arreglo) {
+        int n = arreglo.length;
+        int contador = 0;
+
+        // Recorremos el arreglo y movemos los ceros al final
+        for (int i = 0; i < n; i++) {
+            if (arreglo[i] != 0) {
+                arreglo[contador] = arreglo[i];
+                contador++;
+            }
+        }
+
+        // Llenamos el final del arreglo con ceros
+        while (contador < n) {
+            arreglo[contador] = 0;
+            contador++;
+        }
+    }
+
+    public static boolean busca_en_lista(Alumno al, int[] rep) {
+        // Devuelve true si el legajo de un alumno está en la lista de desaprobados.
+        boolean check = false;
+        int i = 0;
+        while ((rep[i] != 0) && i < rep.length) {
+            if (al.getLegajo() == rep[i]) {
+                check = true;
+                rep[i] = 0; // Hago nulo el alumno que entró en la lista.
+                moverCerosAlFinal(rep); // Limpio y achico la lista.
+            }
+
+            i++;
+        }
+
+        return check;
+    }
+
+    public static void pasar_lista(Alumno[][] esc, int[] rep, List<Alumno> egr) {
+        int j = 0;
+        for (int i = esc.length - 1; i >= 1; i--) {
+            j = 0; // reset cada que comienza a iterar un grado nuevo.
+            while (esc[i][j] != null && j < esc[0].length) {
+
+                // Check si está en la lista
+                if (!busca_en_lista(esc[i][j], rep)) {
+
+                    // Check sólo si está en el último grado.
+                    if (i == esc.length - 1) {
+                        // Se agrega a la lista de egresados.
+                        egr.add(esc[i][j]);
+                        esc[i][j] = null;
+                    } else {
+                        // No está en el último grado.
+                        esc[i][j].setGrado(i + 1);
+                        agrega_alumno(esc[i + 1], esc[i][j]);
+                        esc[i][j] = null;
+                    }
+                }
+                j++;
+            }
+            elimina_null(esc[i]);
+        }
+
+    }
+
+    public static void imprime_arr_int(int[] arr) {
+        System.out.print("|");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + "|");
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
 
         Alumno[][] escuela = new Alumno[7][30];
         double[] promedios = new double[7];
         List<Alumno> egresadosLista = new ArrayList<>();
+        List<String> repitentes = new ArrayList<>();
         int vacantes = 0;
         boolean stop = false;
         carga_lista(escuela);
@@ -467,6 +580,12 @@ public class escuela {
                     break;
                 case 7:
                     imprime_alumnos(escuela);
+                    break;
+                case 8:
+                    carga_repitentes(repitentes); // Carga alumnos que no pasaron desde archivo.
+                    int[] repite = new int[repitentes.size()]; // Crea arreglo de alumnos que no pasaron.
+                    carga_arr_repitente(repite, repitentes);
+                    pasar_lista(escuela, repite, egresadosLista);
                     break;
                 default:
                     stop = true;
