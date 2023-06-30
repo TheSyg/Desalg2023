@@ -336,11 +336,13 @@ public class escuela {
         if (fil < esc.length) {
             if (col < esc[0].length) {
                 if (esc[fil][col] == null) {
+                    // Vacante
                     total = 1 + cuenta_vacantes(esc, fil, col + 1);
                 } else {
                     total = cuenta_vacantes(esc, fil, col + 1);
                 }
             } else {
+                // Reset de columna, comienza nueva fila.
                 total = cuenta_vacantes(esc, fil + 1, 0);
             }
         }
