@@ -452,24 +452,6 @@ public class escuela {
         }
     }
 
-    public static void elimina_ceros(int[] arr) {
-        int j = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != 0) {
-                // Encontró no nulo.
-                arr[j] = arr[i]; // Guarda en la posición más cercana al inicio posible.
-                j++;
-            }
-        }
-
-        while (j < arr.length) {
-            // Cualquier elemento después de j se hace nulo.
-            arr[j] = 0;
-            j++;
-        }
-    }
-
     public static boolean busca_en_lista(Alumno al, int[] rep) {
         // Devuelve true si el legajo de un alumno está en la lista de desaprobados.
         boolean check = false;
