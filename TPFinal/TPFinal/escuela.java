@@ -470,24 +470,6 @@ public class escuela {
         }
     }
 
-    public static void moverCerosAlFinal(int[] arreglo) {
-        int n = arreglo.length;
-        int contador = 0;
-
-        // Recorremos el arreglo y movemos los ceros al final
-        for (int i = 0; i < n; i++) {
-            if (arreglo[i] != 0) {
-                arreglo[contador] = arreglo[i];
-                contador++;
-            }
-        }
-
-        // Llenamos el final del arreglo con ceros
-        while (contador < n) {
-            arreglo[contador] = 0;
-            contador++;
-        }
-    }
 
     public static boolean busca_en_lista(Alumno al, int[] rep) {
         // Devuelve true si el legajo de un alumno está en la lista de desaprobados.
@@ -496,10 +478,7 @@ public class escuela {
         while ((rep[i] != 0) && i < rep.length) {
             if (al.getLegajo() == rep[i]) {
                 check = true;
-                rep[i] = 0; // Hago nulo el alumno que entró en la lista.
-                moverCerosAlFinal(rep); // Limpio y achico la lista.
             }
-
             i++;
         }
 
@@ -532,14 +511,6 @@ public class escuela {
             elimina_null(esc[i]);
         }
 
-    }
-
-    public static void imprime_arr_int(int[] arr) {
-        System.out.print("|");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + "|");
-        }
-        System.out.println();
     }
 
     public static void main(String[] args) {
