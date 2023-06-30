@@ -283,7 +283,7 @@ public class escuela {
         while (!stop) {
             opcion = sc.next().charAt(0);
             if (Character.toLowerCase(opcion) == 'y') {
-                raiz = "D:\\Desalg2023\\TPFinal\\TPFinal\\ListaAlumnos.txt";
+                raiz = "TPFinal\\TPFinal\\ListaAlumnos.txt";
                 stop = true;
             } else if (Character.toLowerCase(opcion) == 'n') {
                 System.out.println("Ingrese una raiz nueva>");
@@ -433,7 +433,7 @@ public class escuela {
 
     public static void carga_repitentes(List<String> rep) {
         try (BufferedReader br = new BufferedReader(
-                new FileReader("D:\\Desalg2023\\TPFinal\\TPFinal\\ListaDesaprobados.txt"))) {
+                new FileReader("TPFinal\\TPFinal\\ListaDesaprobados.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 rep.add(linea);
@@ -470,12 +470,11 @@ public class escuela {
         }
     }
 
-
     public static boolean busca_en_lista(Alumno al, int[] rep) {
         // Devuelve true si el legajo de un alumno está en la lista de desaprobados.
         boolean check = false;
         int i = 0;
-        while ((rep[i] != 0) && i < rep.length) {
+        while (i < rep.length) {
             if (al.getLegajo() == rep[i]) {
                 check = true;
             }
