@@ -5,7 +5,38 @@ import java.util.*;
 
 public class escuela {
 
+    public static void ordInsercion(Alumno[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            Alumno aux = arr[i];
+            int j = i - 1;
+
+            while (j >= 0 && (arr[i].getComparadorNombre().compareTo(arr[j].getComparadorNombre()) > 0)) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = aux;
+        }
+    }
+
+    public static void ordSelec(Alumno[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+
+            int min = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[min].getComparadorNombre().compareTo(arr[j].getComparadorNombre()) > 0) {
+                    min = j;
+                }
+            }
+
+            Alumno temp = arr[min];
+            arr[min] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
     public static void unir(Alumno[] egr, int izq, int centro, int der) {
+
+        // Método que une (conquista).
 
         // Indice que se usan para organizar los subarreglos.
         int i = 0, j = 0;
@@ -59,6 +90,8 @@ public class escuela {
     }
 
     public static void ord_promedio_mergesort(Alumno[] egr, int izq, int der) {
+
+        // Método que divide antes de conquistar.
 
         // Caso Base
         if (izq < der) {

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "pruebaTiempo",
+            "request": "launch",
+            "mainClass": "TPFinal.pruebaTiempo",
+            "projectName": "Desalg2023_44fdc3a2"
+        },
+        {
+            "type": "java",
             "name": "escuela",
             "request": "launch",
             "mainClass": "TPFinal.escuela",
