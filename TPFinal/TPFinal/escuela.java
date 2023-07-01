@@ -6,31 +6,38 @@ import java.util.*;
 public class escuela {
 
     public static void ordInsercion(Alumno[] arr) {
-        for (int i = 1; i < arr.length; i++) {
+        int i = 1;
+        while (i < arr.length && arr[i] != null) {
+
             Alumno aux = arr[i];
             int j = i - 1;
 
-            while (j >= 0 && (arr[i].getComparadorNombre().compareTo(arr[j].getComparadorNombre()) > 0)) {
+            while (arr[j] != null && j >= 0
+                    && (arr[i].getComparadorNombre().compareTo(arr[j].getComparadorNombre()) > 0)) {
                 arr[j + 1] = arr[j];
                 j = j - 1;
             }
             arr[j + 1] = aux;
         }
+
     }
 
     public static void ordSelec(Alumno[] arr) {
-        for (int i = 0; i < arr.length - 1; i++) {
+        int i = 0, j = 0;
+        while (i < arr.length - 1 && arr[i] != null) {
 
             int min = i;
-            for (int j = i + 1; j < arr.length; j++) {
+            while (j < arr.length && arr[j] != null) {
                 if (arr[min].getComparadorNombre().compareTo(arr[j].getComparadorNombre()) > 0) {
                     min = j;
                 }
+                j++;
             }
 
             Alumno temp = arr[min];
             arr[min] = arr[i];
             arr[i] = temp;
+            i++;
         }
     }
 
